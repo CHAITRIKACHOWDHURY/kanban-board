@@ -1,0 +1,38 @@
+<div class="row add-btn">
+    <button 
+        #tooltip="matTooltip"
+        matTooltip="Add new task"
+        [matTooltipClass]="'tooltip'"
+        type="button"
+        class="add-task"
+        [matTooltipPosition]="'below'"
+        (click)="addTask()">
+        <i class="add"></i>
+        <div>Add Task</div>
+    </button>
+</div>
+<div class="container">    
+    <ng-container *ngFor="let board of taskBoardList">
+        <div class="board">
+            <div class="board-header">
+                <h3>
+                    {{board?.title}}
+                </h3>    
+            </div>
+            <div 
+                cdkDropList>
+                <ng-container *ngFor="let item of taskList">
+                    <ng-container *ngIf="item?.status === board?.id">
+                        <app-task 
+                            (cdkDragDropped)="updateTaskStatus($event, item)"
+                            [task]="item"
+                            cdkDragLockAxis="x"
+                            cdkDragBoundary=".container"
+                            cdkDrag>
+                        </app-task>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </div>
+    </ng-container>
+</div>

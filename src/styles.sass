@@ -1,1 +1,206 @@
 /* You can add global styles to this file, and also import other style files */
+
+$background_color: #FBF1D3
+$font_color_task: #282A3A
+$font_color_header: #FFFFFF
+$background_color_header: #C69749
+$background_color_container: #282A3A
+$background_color_con_header: #5f5642   
+$background_color_note: #FADA9D
+$border_color: #735F32
+$disable_color: #808080
+
+@mixin center-align
+    align-items: center
+@mixin upper-case
+    text-transform: uppercase
+@mixin bottom-margin
+    margin-bottom: 20px
+@mixin border-round
+    border-radius: 5px
+@mixin container-margin
+    margin: 0 10px 10px 10px
+@mixin button-img($url)
+    background-image: $url
+    background-size: 30px
+    height: 30px
+    width: 30px
+    margin-left: auto
+    background-color: inherit
+    border: none
+
+body 
+    background-color: $background_color
+    margin: 0px
+    overflow: hidden
+
+.header 
+    @include center-align
+    height: 70px
+    background-color: $background_color_header
+    display: flex
+
+.logo
+    color: $background_color
+    font-weight: bold
+    font-size: xx-large
+    margin-left: 10px
+    display: flex
+    @include center-align
+
+.logo-icon
+    background-image: url(./assets/kanban.svg)
+    background-size: 50px
+    height: 50px
+    width: 50px
+    margin-right: 5px
+
+.task-board
+    overflow-y: auto
+    overflow-x: hidden
+    position: relative
+    max-height: 90%
+
+.task-board::-webkit-scrollbar 
+    width: 12px               
+
+
+.task-board::-webkit-scrollbar-track 
+    background: $background_color        
+
+
+.task-board::-webkit-scrollbar-thumb 
+    background-color: $disable_color  
+    border-radius: 20px       
+    border: 3px solid $background_color  
+
+
+.row
+    display: flex
+    flex-direction: row  !important
+    align-content: center
+    @include bottom-margin
+
+.container
+    display: flex
+    overflow-y: auto
+    overflow-x: hidden
+    font-style: normal
+    @include border-round
+    color: $font_color_header
+    border: 15px solid $border_color
+    min-height: 480px
+    @include container-margin
+    background-color: $background_color_container
+
+.board
+    width: 33.33%
+    display: flex
+    flex-direction: column
+    border-left: 2px solid
+
+.board:first-child
+    border-left: 0
+
+.board-header
+    display: flex
+    justify-content: center
+    border-bottom: 2px solid
+
+.task
+    @include border-round
+    background-color: $background_color_note
+    display: flex
+    overflow: hidden
+    flex-direction: column
+    font-size: 16px
+    font-style: normal
+    margin: 20px
+    font-family: cursive
+    height: 150px
+    color: $font_color_task
+    cursor: pointer
+    box-shadow: 5px 5px 7px rgb(0 0 0 / 70%)
+
+.task:nth-child(even)
+    transform: rotate(2deg)
+
+.task:nth-child(odd)
+    transform: rotate(-2deg)
+
+::ng-deep .tooltip 
+    background-color: yellow
+
+button
+    cursor: pointer
+
+input
+    @include border-round
+    border: 2px solid $border_color
+    height: 40px
+    outline: none
+    width: 400px
+
+textarea 
+    resize: none
+    @include border-round
+    border: 2px solid $border_color
+    height: 100px
+    outline: none
+    width: 400px
+
+label
+    margin-bottom: 5px !important
+
+.add
+    @include button-img(url(./assets/add.svg))
+
+.delete
+    @include button-img(url(./assets/delete.svg))
+    margin: 0 !important
+
+.edit
+    @include button-img(url(./assets/edit.svg))
+
+.task-container
+    padding: 10px
+    color: $font_color_task
+
+.title
+    font-weight: bold
+    @include center-align
+    margin-bottom: 5px
+    
+.desc
+    margin: 0
+    font-size: small
+
+.mat-dialog-container
+    background-color: $background_color_note
+
+.ok 
+    margin-left: auto
+    margin-bottom: 0
+    padding: 0.2em 1.45em
+    @include upper-case
+    background-color: $background_color_header
+    color: $font_color_header
+    border: none
+
+.add-task
+    margin-left: auto
+    margin-bottom: 0
+    padding: 0.2em 1.45em
+    @include upper-case
+    background-color: $background_color_note
+    color: $font_color_task
+    border: none
+    display: flex
+    @include center-align
+    box-shadow: 1px 1px 2px rgb(0 0 0 / 70%)
+
+.ok:disabled
+    background-color: $disable_color
+
+.add-btn
+    margin: 20px 10px

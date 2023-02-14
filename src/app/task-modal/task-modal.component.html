@@ -1,0 +1,24 @@
+<form #taskForm="ngForm">
+    <label class="row">Task Title</label>
+    <input class="row"
+        [name]="'task-title'" 
+        type="text"
+        required
+        [maxlength]="20"
+        [(ngModel)]="data.title" >    
+    <label class="row">Task Description</label>
+    <textarea 
+        class="row"
+        [name]="'task-description'" 
+        required
+        type="text"
+        [maxlength]="200"
+        [(ngModel)]="data.description" >     
+    </textarea> 
+    <button 
+        [disabled]="!taskForm?.valid || !taskForm?.dirty"
+        class="row ok" 
+        [mat-dialog-close]="data">
+        Ok
+    </button>
+</form>
