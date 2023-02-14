@@ -167,13 +167,25 @@ label
     color: $font_color_task
 
 .title
-    font-weight: bold
     @include center-align
     margin-bottom: 5px
+
+.task-title
+    width: 70%
+    white-space: nowrap
+    overflow: hidden
+    font-weight: bold
+    text-overflow: ellipsis
     
 .desc
     margin: 0
     font-size: small
+    display: -webkit-box
+    word-break: break-word
+    -webkit-line-clamp: 5
+    -webkit-box-orient: vertical
+    overflow: hidden
+    text-overflow: ellipsis
 
 .mat-dialog-container
     background-color: $background_color_note

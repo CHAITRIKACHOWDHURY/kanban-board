@@ -1,12 +1,15 @@
 <div class="task-container">
     <div class="title row">
-        {{task?.title}}
+        <div class="task-title">
+            {{task?.title}}
+        </div>
         <button 
             #tooltip="matTooltip"
             matTooltip="Edit task"
             class="edit"
             type="button"
-            [matTooltipPosition]="'right'"
+            [matTooltipClass]="'tooltip'"
+            [matTooltipPosition]="'below'"
             (click)="editTask()">
         </button>
         <button 
@@ -14,7 +17,8 @@
             matTooltip="Delete task"
             class="delete"
             type="button"
-            [matTooltipPosition]="'right'"
+            [matTooltipClass]="'tooltip'"
+            [matTooltipPosition]="'below'"
             (click)="deleteTask()">
         </button>
     </div>

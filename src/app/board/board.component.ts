@@ -35,12 +35,14 @@ export class BoardComponent implements OnInit {
     this.setTaskList();
   }
 
+  /** subscribes ngrx/store data */
   setTaskList(): void {
     this.taskList$.subscribe((tasks) => {
       this.taskList = tasks;
     });
   }
 
+  /** open Task Modal Diaglog to capture Task info, add it in the store */
   addTask(): void {
     const dialogRef = this.dialog.open(TaskModalComponent, {
       data: {} as TaskDetails
@@ -54,8 +56,8 @@ export class BoardComponent implements OnInit {
     });
   }
 
+  /** update task status in the store according to drag position*/
   updateTaskStatus(event: CdkDragDrop<TaskDetails>, item: TaskDetails): void {
-    console.log(event, JSON.stringify(item));
     if (item.status === Task_Status.TO_DO) {
       if (event.distance.x > (event.item.element.nativeElement.scrollWidth *2)) {
         this.store.dispatch(updateTaskStatus({task: item, status: Task_Status.DONE}));

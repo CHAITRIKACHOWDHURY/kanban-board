@@ -4,7 +4,7 @@ import { TaskComponent } from './task.component';
 import { StoreModule } from '@ngrx/store';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { TaskDetails, Task_Status } from '../models/task';
+import { Task_Status } from '../models/task';
 import { TaskModalComponent } from '../task-modal/task-modal.component';
 import { of } from 'rxjs';
 

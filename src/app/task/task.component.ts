@@ -23,10 +23,12 @@ export class TaskComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /** delete task from store*/
   deleteTask(): void {
     this.store.dispatch(deleteTask(this.task));
   }
 
+  /** open Task Modal Diaglog to update Task info, update it in the store */
   editTask(): void {
     const newTask = JSON.parse(JSON.stringify(this.task));
     const dialogRef = this.dialog.open(TaskModalComponent, {
@@ -38,6 +40,5 @@ export class TaskComponent implements OnInit {
       }
     });
   }
-
 
 }
