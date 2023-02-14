@@ -1,13 +1,13 @@
 # Kanban Board
 
-This is the assesment submission project for Kanban Board Single Page Application.  A kanban board is one of the tools that can be used to implement kanban to manage work at a personal or organizational level.
+This is the assessment submission project for Kanban Board Single Page Application. A kanban board is one of the tools that can be used to implement kanban practices to manage work at a personal or organizational level.
 
 ## Features
 
 * The board is consisting of three columns: “To Do”, “Implementing” and “Done”.  
 * Each column have display tasks described in plain text.
 * There is ability of adding new task in the board and the new task will be always added to “To Do” column.
-* The tasks can be dragged and drpped to desired column.
+* The tasks can be dragged and dropped to desired column.
 * The tasks can be edited or removed.
 
 ## Technical Description
