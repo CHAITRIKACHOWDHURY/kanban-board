@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { deleteTask, updateTaskData } from '../store/kanban.actions';
 import { MatDialog } from '@angular/material/dialog';
 import { TaskModalComponent } from '../task-modal/task-modal.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-task',
@@ -14,6 +15,7 @@ export class TaskComponent implements OnInit {
 
   @HostBinding('class.task') styling = true;
   @Input() task: TaskDetails;
+  public modalSubscription: Subscription;
 
   constructor(
     public store: Store<{ kanban: Array<TaskDetails> }>,
@@ -34,11 +36,17 @@ export class TaskComponent implements OnInit {
     const dialogRef = this.dialog.open(TaskModalComponent, {
       data: newTask
     });
-    dialogRef.afterClosed().subscribe((result: TaskDetails) => {
+    this.modalSubscription = dialogRef.afterClosed().subscribe((result: TaskDetails) => {
       if (result) {
         this.store.dispatch(updateTaskData(result));
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.modalSubscription) {
+      this.modalSubscription.unsubscribe();
+    }
   }
 
 }

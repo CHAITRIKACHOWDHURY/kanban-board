@@ -21,7 +21,7 @@
             </div>
             <div 
                 cdkDropList>
-                <ng-container *ngFor="let item of taskList">
+                <ng-container *ngFor="let item of (taskList$ | async)">
                     <ng-container *ngIf="item?.status === board?.id">
                         <app-task 
                             (cdkDragDropped)="updateTaskStatus($event, item)"

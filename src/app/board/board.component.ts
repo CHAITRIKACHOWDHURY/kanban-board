@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TaskDetails, Task_Status } from '../models/task';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material/dialog';
 import { TaskModalComponent } from '../task-modal/task-modal.component';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { addTask, updateTaskStatus } from '../store/kanban.actions';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -13,11 +13,11 @@ import { v4 as uuidv4 } from 'uuid';
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.sass']
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent implements OnInit, OnDestroy {
 
-  public taskList: Array<TaskDetails> = [];
-  private taskList$: Observable<Array<TaskDetails>>
+  public taskList$: Observable<Array<TaskDetails>>
   public Task_Status = Task_Status;
+  public modalSubscription: Subscription;
   public readonly taskBoardList = [
     { title: 'To Do', id: Task_Status.TO_DO },
     { title: 'Implementing', id: Task_Status.IMPLEMENTING },
@@ -31,23 +31,14 @@ export class BoardComponent implements OnInit {
     this.taskList$ = store.select('kanban');
   }
 
-  ngOnInit(): void {
-    this.setTaskList();
-  }
-
-  /** subscribes ngrx/store data */
-  setTaskList(): void {
-    this.taskList$.subscribe((tasks) => {
-      this.taskList = tasks;
-    });
-  }
+  ngOnInit(): void { }
 
   /** open Task Modal Diaglog to capture Task info, add it in the store */
   addTask(): void {
     const dialogRef = this.dialog.open(TaskModalComponent, {
       data: {} as TaskDetails
     });
-    dialogRef.afterClosed().subscribe((result: TaskDetails) => {
+    this.modalSubscription = dialogRef.afterClosed().subscribe((result: TaskDetails) => {
       if (result) {
         result.id = uuidv4();
         result.status = Task_Status.TO_DO;
@@ -76,6 +67,12 @@ export class BoardComponent implements OnInit {
       } else {
         this.store.dispatch(updateTaskStatus({task: item, status: Task_Status.TO_DO}));
       }
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.modalSubscription) {
+      this.modalSubscription.unsubscribe();
     }
   }
 

@@ -1,6 +1,6 @@
 # Kanban Board
 
-This is the assessment submission project for Kanban Board Single Page Application. A kanban board is one of the tools that can be used to implement kanban practices to manage work at a personal or organizational level.
+A kanban board is one of the tools that can be used to implement kanban practices to manage work at a personal or organizational level.
 
 ## Features
 
